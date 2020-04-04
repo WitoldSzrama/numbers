@@ -77,4 +77,9 @@ class Numbers
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getCreatedAt()->format('Y-m-d H:i:s').', '.$this->getInputNumber().', '.$this->getResult();
+    }
 }
