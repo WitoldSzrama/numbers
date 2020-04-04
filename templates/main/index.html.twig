@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liczby{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Witam w applikacji tworzacej ciagi liczb</h1>
+            <p class="lead">Jest to prosta aplikacja w ktorej podajac wartosc otrzymasz najwyzszy wynik w podanym ciagu liczb</p>
+            <hr class="my-4">
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Przejdz do formularza</p>
+                    <button type="button" data-toggle="modal" data-target="#form" class="btn btn-primary btn-lg" href="#form" role="button">Formularz</button>
+                </div>
+                <div class="col-sm-6">
+                    <p>Historia zapytan</p>
+                    <button class="btn btn-primary btn-lg" id="button-list" >Historia</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% include 'main/helper/modal.html.twig' %}
+    <div id="list" class="visible">
+        {{ render(controller('App\\Controller\\MainController::numbersList')) }}
+    </div>
+{% endblock %}
+
