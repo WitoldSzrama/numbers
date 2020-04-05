@@ -31,6 +31,11 @@ class MainController extends AbstractController
             $numbersFactory->saveNumbers();
             $em->persist($numbers);
             $em->flush();
+            $this->addFlash('success', 'Wielkosc zbioru: '.$numbers->getInputNumber().' maksymalna wartosc w zbiorze: '.$numbers->getResult());
+
+            return $this->render('main/index.html.twig', [
+                'form' => $form->createView(),
+            ]);
         }
 
         return $this->render('main/index.html.twig', [

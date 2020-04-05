@@ -1,8 +1,8 @@
 <ul class="list-group">
     {% for number in allNumbers %}
-            <li class="list-group-item">Sprawdzono: {{ number.createdAt| date }}: <br> Ilosc elementow w zbiorze: {{ number.inputNumber }} najwieksza wartosc: <b>{{ number.result }}</b></li>
+            <li class="list-group-item">Sprawdzono: {{ number.createdAt| date }}: <br> Wielkość zbioru: {{ number.inputNumber }} najwyższa wartość: <b>{{ number.result }}</b></li>
     {% endfor %}
     {% if allNumbers is empty %}
-        <li class="list-group-item">Brak rekordow</li>
+        <li class="list-group-item">Brak rekordów</li>
     {% endif %}
 </ul>

@@ -5,8 +5,15 @@
 {% block body %}
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-4">Witam w applikacji tworzacej ciagi liczb</h1>
-            <p class="lead">Jest to prosta aplikacja w ktorej podajac wartosc otrzymasz najwyzszy wynik w podanym ciagu liczb</p>
+            <h1 class="display-4">Witam w aplikacji tworzącej ciągi liczb</h1>
+            <p class="lead">Jest to prosta aplikacja w której podając wielkość zbioru otrzymasz najwyższą wartość w ciągu liczb</p>
+            <p>Zbiór przedstawia sie następująco dla podanych indexów zbioru:</p>
+            <ul>
+                <li> Dla indexu 0 wynik jest równy 0</li>
+                <li> Dla indexu 1  wynik jest równy 1</li>
+                <li> Dla indexów parzystych wynik jest równy wartości indexu podzielonej przez 2</li>
+                <li> Dla indexów nieparzystych wynik jest równy (wartości indexu minus 1) podzielonej przez 2 plus (wartości indeksu podzielonej przez 2) plus 1</li>
+            </ul>
             <hr class="my-4">
         </div>
 
@@ -17,13 +24,24 @@
                     <button type="button" data-toggle="modal" data-target="#form" class="btn btn-primary btn-lg" href="#form" role="button">Formularz</button>
                 </div>
                 <div class="col-sm-6">
-                    <p>Historia zapytan</p>
+                    <p>Historia zapytań</p>
                     <button class="btn btn-primary btn-lg" id="button-list" >Historia</button>
                 </div>
             </div>
         </div>
-
     </div>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+
+            <div class="card">
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{ message }}</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     {% include 'main/helper/modal.html.twig' %}
     <div id="list" class="visible">
         {{ render(controller('App\\Controller\\MainController::numbersList')) }}

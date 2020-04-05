@@ -15,11 +15,11 @@ class NumbersType extends AbstractType
     {
         $builder
             ->add('inputNumber',null, [
-                'label' => 'Podaj liczbe "n" przedstawiajacy wielkosc zbioru',
+                'label' => 'Podaj liczbę przedstawiającą wielkość zbioru',
                 'attr' => [
                     'min' => 1,
                     'max' => 99999,
-                    'oninvalid'=>"setCustomValidity('Prosze podac numer z zakresu od 1 do 99999')"
+                    'oninvalid'=>"setCustomValidity(this.willValidate ? '' : Proszę podać numer z zakresu od 1 do 99999')"
                 ]
             ])
             ->add('submit', SubmitType::class, [
