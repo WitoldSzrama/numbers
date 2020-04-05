@@ -17,3 +17,13 @@ const list = document.querySelector('#list');
 button.onclick = function () {
     list.classList.toggle('visible')
 };
+
+const inputNumber = document.querySelector('#numbers_inputNumber');
+
+inputNumber.addEventListener("keyup",function () {
+    if (inputNumber.value > 0 && inputNumber.value <= 99999) {
+        inputNumber.setCustomValidity('');
+    } else {
+        inputNumber.setCustomValidity('Proszę podać numer z zakresu od 1 do 99999');
+    }
+});

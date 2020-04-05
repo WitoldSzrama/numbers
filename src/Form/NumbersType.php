@@ -19,7 +19,7 @@ class NumbersType extends AbstractType
                 'attr' => [
                     'min' => 1,
                     'max' => 99999,
-                    'oninvalid'=>"setCustomValidity(this.willValidate ? '' : Proszę podać numer z zakresu od 1 do 99999')"
+                    'oninvalid'=>"setCustomValidity('Proszę podać numer z zakresu od 1 do 99999')"
                 ]
             ])
             ->add('submit', SubmitType::class, [
