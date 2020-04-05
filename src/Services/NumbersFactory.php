@@ -19,14 +19,14 @@ class NumbersFactory
         return $numbers;
     }
 
-    public function saveNumbers()
+    public function setUpResults()
     {
         $this->numbers->setResult($this->getMax());
     }
 
     private function getMax()
     {
-        $indexArray = self::getResultsArray();
+        $indexArray = $this->getResultsArray();
 
         return max($indexArray);
     }

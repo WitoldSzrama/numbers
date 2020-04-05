@@ -46,7 +46,7 @@ class NumbersCreateCommand extends Command
         if ((string)(int)$inputNumber == $inputNumber && $inputNumber > 0 && $inputNumber <= 99999) {
             $numbers = $this->numbersFactory->createNewNumbers();
             $numbers->setInputNumber($inputNumber);
-            $this->numbersFactory->saveNumbers();
+            $this->numbersFactory->setUpResults();
             $this->em->persist($numbers);
             $this->em->flush();
             $io->success('Quantity: '.$inputNumber.' maximum value: '.$numbers->getResult());

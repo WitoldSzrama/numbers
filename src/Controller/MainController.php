@@ -28,14 +28,12 @@ class MainController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $numbersFactory->saveNumbers();
+            $numbersFactory->setUpResults();
             $em->persist($numbers);
             $em->flush();
             $this->addFlash('success', 'Wielkosc zbioru: '.$numbers->getInputNumber().' maksymalna wartosc w zbiorze: '.$numbers->getResult());
 
-            return $this->render('main/index.html.twig', [
-                'form' => $form->createView(),
-            ]);
+            return $this->redirectToRoute('main');
         }
 
         return $this->render('main/index.html.twig', [
