@@ -22,7 +22,7 @@ final class Version20200404093009 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('CREATE TABLE numbers (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, result INTEGER DEFAULT NULL, input_number INTEGER DEFAULT NULL)');
+        $this->addSql('CREATE TABLE numbers (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, input_number INTEGER DEFAULT NULL)');
         $this->addSql('ALTER TABLE numbers ADD COLUMN created_at DATETIME');
     }
 

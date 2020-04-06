@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Numbers;
 use App\Form\NumbersType;
-use App\Services\NumbersFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,17 +17,15 @@ class MainController extends AbstractController
      * @Route("/", name="main")
      * @param EntityManagerInterface $em
      * @param Request $request
-     * @param NumbersFactory $numbersFactory
      * @return Response
      */
-    public function index(EntityManagerInterface $em, Request $request, NumbersFactory $numbersFactory)
+    public function index(EntityManagerInterface $em, Request $request)
     {
-        $numbers = $numbersFactory->createNewNumbers();
-        $form = $this->createForm(NumbersType::class, $numbers);
+        $form = $this->createForm(NumbersType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $numbersFactory->setUpResults();
+            $numbers = $form->getData();
             $em->persist($numbers);
             $em->flush();
             $this->addFlash('success', 'Wielkosc zbioru: '.$numbers->getInputNumber().' maksymalna wartosc w zbiorze: '.$numbers->getResult());

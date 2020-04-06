@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Services\NumbersFactory;
+use App\Entity\Numbers;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,10 +17,6 @@ class NumbersCreateCommand extends Command
      * @var EntityManagerInterface
      */
     private $em;
-    /**
-     * @var NumbersFactory
-     */
-    private $numbersFactory;
 
     protected function configure()
     {
@@ -31,11 +27,10 @@ class NumbersCreateCommand extends Command
         ;
     }
 
-    public function __construct(EntityManagerInterface $em,NumbersFactory $numbersFactory, string $name = null)
+    public function __construct(EntityManagerInterface $em, string $name = null)
     {
         parent::__construct($name);
         $this->em = $em;
-        $this->numbersFactory = $numbersFactory;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -44,9 +39,8 @@ class NumbersCreateCommand extends Command
         $inputNumber = $input->getArgument('inputNumber');
 
         if ((string)(int)$inputNumber == $inputNumber && $inputNumber > 0 && $inputNumber <= 99999) {
-            $numbers = $this->numbersFactory->createNewNumbers();
+            $numbers = new Numbers();
             $numbers->setInputNumber($inputNumber);
-            $this->numbersFactory->setUpResults();
             $this->em->persist($numbers);
             $this->em->flush();
             $io->success('Quantity: '.$inputNumber.' maximum value: '.$numbers->getResult());

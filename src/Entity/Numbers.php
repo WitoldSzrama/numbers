@@ -19,11 +19,6 @@ class Numbers
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     */
-    private $result;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
      * @Assert\NotBlank
      * @Assert\Range(
      *     min = 1,
@@ -37,6 +32,11 @@ class Numbers
      */
     private $createdAt;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,14 +44,25 @@ class Numbers
 
     public function getResult(): ?int
     {
-        return $this->result;
-    }
+        $indexArray = array_fill(0, $inputNumber = $this->inputNumber + 1, null);
+        foreach ($indexArray as $index => $value) {
+            switch ($index) {
+                case 0:
+                    $indexArray[$index] = 0;
+                    break;
+                case 1:
+                    $indexArray[$index] = 1;
+                    break;
+                case $index % 2 === 0:
+                    $indexArray[$index] = $indexArray[$index / 2];
+                    break;
+                case $index % 2 !== 0:
+                    $i = ($index - 1) / 2;
+                    $indexArray[$index] = $indexArray[$i] + $indexArray[$i + 1];
+            }
+        }
 
-    public function setResult(?int $result): self
-    {
-        $this->result = $result;
-
-        return $this;
+        return max($indexArray);
     }
 
     public function getInputNumber(): ?int
@@ -71,15 +82,9 @@ class Numbers
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->getCreatedAt()->format('Y-m-d H:i:s').', '.$this->getInputNumber().', '.$this->getResult();
     }
+
 }
